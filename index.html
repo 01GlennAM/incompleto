@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDUCLIC - Plataforma Virtual de Cursos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ============================================================
+       VISTA 1: LOGIN
+  ============================================================ -->
+  <section id="view-login" class="view active">
+    <div class="login-bg">
+      <div class="login-card">
+        <div class="logo-wrap">
+          <span class="logo-icon">🎓</span>
+          <h1 class="logo-text">EDUCLIC</h1>
+          <p class="logo-sub">Aprende sin límites</p>
+        </div>
+
+        <div class="form-group">
+          <label for="input-user">Usuario</label>
+          <input type="text" id="input-user" placeholder="ejm: admin" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="input-pass">Contraseña</label>
+          <input type="password" id="input-pass" placeholder="••••••••" />
+        </div>
+
+        <button id="btn-login" class="btn-primary">Ingresar</button>
+        <p id="login-message" class="login-msg"></p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       VISTA 2: HOME — Selección de categoría
+  ============================================================ -->
+  <section id="view-home" class="view">
+    <nav class="topbar">
+      <!-- Al hacer clic en el logo se recarga el home (ya estamos en home, solo scroll top) -->
+      <span class="logo-text small logo-nav" data-target="view-home">EDUCLIC</span>
+      <span id="nav-username" class="nav-user"></span>
+      <button class="btn-logout" id="btn-logout">Salir</button>
+    </nav>
+
+    <div class="home-content">
+      <h2 id="home-welcome" class="home-title"></h2>
+      <p class="home-subtitle">¿Qué quieres aprender hoy?</p>
+
+      <div class="category-grid">
+        <div class="category-card" id="card-dev" data-cat="dev">
+          <span class="cat-icon">💻</span>
+          <h3>Desarrollo de Software</h3>
+          <p>HTML, CSS, JavaScript, Java, MySQL y más.</p>
+          <button class="btn-cat" data-cat="dev">Explorar cursos</button>
+        </div>
+
+        <div class="category-card" id="card-design" data-cat="design">
+          <span class="cat-icon">🎨</span>
+          <h3>Diseño Gráfico</h3>
+          <p>Photoshop, Illustrator, UX/UI y fundamentos.</p>
+          <button class="btn-cat" data-cat="design">Explorar cursos</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       VISTA 3: LISTA DE CURSOS
+  ============================================================ -->
+  <section id="view-courses" class="view">
+    <nav class="topbar">
+      <!-- Logo navega al home -->
+      <span class="logo-text small logo-nav" data-target="view-home">EDUCLIC</span>
+      <div class="topbar-actions">
+        <!-- NUEVO: botón para cambiar de categoría (vuelve al home) -->
+        <button class="btn-change-cat" id="btn-change-cat">🔄 Cambiar categoría</button>
+        <button class="btn-back" data-target="view-home">← Volver</button>
+      </div>
+    </nav>
+
+    <div class="courses-content">
+      <h2 id="courses-title" class="section-title"></h2>
+      <div id="courses-grid" class="courses-grid"></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       VISTA 4: DETALLE DEL CURSO
+  ============================================================ -->
+  <section id="view-detail" class="view">
+    <nav class="topbar">
+      <!-- Logo navega al home -->
+      <span class="logo-text small logo-nav" data-target="view-home">EDUCLIC</span>
+      <button class="btn-back" id="back-from-detail">← Volver</button>
+    </nav>
+
+    <div class="detail-content">
+      <h2 id="detail-title" class="section-title"></h2>
+      <p id="detail-desc" class="detail-desc"></p>
+
+      <div class="video-wrap">
+        <iframe id="detail-video"
+          src=""
+          title="Video del curso"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="teacher-card">
+        <img id="teacher-img" src="https://via.placeholder.com/160?text=Profesor" alt="Profesor" class="teacher-avatar" onerror="this.onerror=null;this.src='https://via.placeholder.com/160?text=Profesor'" />
+        <div class="teacher-info">
+          <h3 id="teacher-name"></h3>
+          <p id="teacher-bio"></p>
+        </div>
+      </div>
+
+      <button id="btn-enroll" class="btn-primary enroll-btn">
+        🛒 Inscribirme
+      </button>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       VISTA 5: PASARELA DE PAGO
+  ============================================================ -->
+  <section id="view-payment" class="view">
+    <nav class="topbar">
+      <!-- Logo navega al home -->
+      <span class="logo-text small logo-nav" data-target="view-home">EDUCLIC</span>
+      <button class="btn-back" id="back-from-payment">← Volver</button>
+    </nav>
+
+    <div class="payment-content">
+      <h2 class="section-title">
+        <span class="title-icon">💳</span>
+        <span class="title-text">Pago seguro</span>
+      </h2>
+      <p id="payment-course-name" class="payment-course"></p>
+
+      <div class="payment-form-wrap">
+        <div class="form-group">
+          <label for="pay-name">Nombre en la tarjeta</label>
+          <input type="text" id="pay-name" placeholder="Juan Pérez" />
+        </div>
+        <div class="form-group">
+          <label for="pay-card">Número de tarjeta</label>
+          <input type="text" id="pay-card" placeholder="1234 5678 9012 3456" maxlength="19" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pay-date">Fecha de vencimiento</label>
+            <input type="text" id="pay-date" placeholder="MM/AA" maxlength="5" />
+          </div>
+          <div class="form-group">
+            <label for="pay-cvv">CVV</label>
+            <input type="text" id="pay-cvv" placeholder="123" maxlength="3" />
+          </div>
+        </div>
+
+        <button id="btn-pay" class="btn-primary">Pagar ahora</button>
+        <div id="payment-result" class="payment-result"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       BOTÓN FLOTANTE DE WHATSAPP
+       Visible siempre (se muestra/oculta según vista con JS)
+  ============================================================ -->
+  <a id="whatsapp-float"
+     href="https://wa.me/573001234567?text=Hola%2C%20quiero%20m%C3%A1s%20info%20sobre%20los%20cursos%20de%20EDUCLIC"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="whatsapp-float"
+     title="Contáctanos por WhatsApp">
+    <!-- Icono SVG oficial de WhatsApp (no depende de librería externa) -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="#fff">
+      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.489 2.027 7.8L0 32l8.463-2.001A15.94 15.94 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.287 13.287 0 01-6.77-1.848l-.486-.29-5.025 1.188 1.215-4.893-.316-.503A13.27 13.27 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.29-9.987c-.4-.2-2.365-1.167-2.732-1.3-.367-.133-.633-.2-.9.2-.267.4-1.033 1.3-1.267 1.567-.233.267-.467.3-.867.1-.4-.2-1.688-.622-3.214-1.983-1.188-1.059-1.99-2.367-2.223-2.767-.233-.4-.025-.617.175-.817.18-.18.4-.467.6-.7.2-.233.267-.4.4-.667.133-.267.067-.5-.033-.7-.1-.2-.9-2.167-1.233-2.967-.325-.78-.655-.674-.9-.686l-.767-.013c-.267 0-.7.1-1.067.5-.367.4-1.4 1.367-1.4 3.333 0 1.967 1.433 3.867 1.633 4.133.2.267 2.82 4.307 6.833 6.033.955.412 1.7.658 2.282.843.958.305 1.831.262 2.52.159.769-.115 2.365-.967 2.699-1.9.333-.933.333-1.733.233-1.9-.1-.167-.367-.267-.767-.467z"/>
+    </svg>
+  </a>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
