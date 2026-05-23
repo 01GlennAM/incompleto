@@ -9,6 +9,8 @@
 </head>
 <body>
 
+  
+
   <!-- ============================================================
        VISTA 1: LOGIN
   ============================================================ -->
@@ -67,15 +69,17 @@
           <button class="btn-cat" data-cat="design">Explorar cursos</button>
         </div>
 
-         <div class="category-card" id="card-cont" data-cat="cont">
-          <span class="cat-icon">👨‍🎓</span>
-          <h3>Sobre Nosotros</h3>
-          <p>Conocenos</p> 
-          <button class="btn-cat" data-cat="dev">Explorar API</button>
+        <div class="category-card" id="card-cont" data-cat="cont" onclick="irAEquipo()">
+        <span class="cat-icon">👨‍🎓</span>
+        <h3>Sobre Nosotros</h3>
+          <p>Conocenos</p>
+        <button class="btn-cat" data-cat="cont">Explorar API</button>
+        </div>
         </div>
       </div>
-    </div>
   </section>
+
+ 
 
 
   <!-- ============================================================
@@ -92,31 +96,106 @@
       </div>
     </nav>
 
-     <div class="detail-content">
-    <h2 class="section-title">Sobre Nosotros</h2>
-
-    <p>
-      EDUCLIC es una plataforma educativa enfocada en el aprendizaje
-      de tecnología y desarrollo de software.
-    </p>
-
-    <p>
-      Nuestro objetivo es ayudar a estudiantes a aprender de manera
-      práctica y sencilla.
-    </p>
-  </div>
-
-    <div class="courses-content">
-      <h2 id="courses-title" class="section-title"></h2>
-      <div id="courses-grid" class="courses-grid"></div>
-      
-    </div>
-
     <div class="courses-content">
       <h2 id="courses-title" class="section-title"></h2>
       <div id="courses-grid" class="courses-grid"></div>
     </div>
   </section>
+
+   <!-- ============================================================
+     VISTA: SOBRE NOSOTROS
+============================================================ -->
+<section id="view-equipo" class="view">
+
+  <nav class="topbar">
+    <!-- Logo -->
+    <span class="logo-text small logo-nav" data-target="view-home">
+      EDUCLIC
+    </span>
+
+    <div class="topbar-actions">
+      <button class="btn-change-cat" id="btn-change-equipo">
+        🔄 Cambiar categoría
+      </button>
+
+      <button class="btn-back" id="back-from-equipo">
+        ← Volver
+      </button>
+    </div>
+  </nav>
+
+  <div class="detail-content">
+
+    <h2 class="section-title">
+      👨‍🎓 Sobre Nosotros
+    </h2>
+
+    <p class="detail-desc">
+      Somos estudiantes apasionados por el desarrollo de software y la tecnología.
+      EDUCLIC nace como un proyecto educativo para ayudar a las personas
+      a aprender programación y diseño de manera sencilla.
+    </p>
+
+  </div>
+
+  <!-- BOTONES COMO LOS OTROS DOS -->
+  <div class="courses-content">
+
+    <div class="category-switcher">
+      <button class="btn-switch">
+        Desarrollo de Software
+      </button>
+
+      <button class="btn-switch">
+        Diseño Gráfico
+      </button>
+
+      <button class="btn-switch active">
+        Sobre Nosotros
+      </button>
+    </div>
+
+  </div>
+
+  <!-- CARDS DEL EQUIPO -->
+  <div id="equipo-container" class="courses-grid">
+
+    <div class="course-card">
+      <div class="course-main">
+        <span class="course-icon">👨‍💻</span>
+        <h3>Glenn</h3>
+        <p>Frontend Developer</p>
+        <span class="course-price">
+          HTML, CSS y JavaScript
+        </span>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-main">
+        <span class="course-icon">🎨</span>
+        <h3>Compañero 2</h3>
+        <p>Diseñador UI/UX</p>
+        <span class="course-price">
+          Diseño y experiencia visual
+        </span>
+      </div>
+    </div>
+
+    <div class="course-card">
+      <div class="course-main">
+        <span class="course-icon">🗄️</span>
+        <h3>Compañero 3</h3>
+        <p>Backend Developer</p>
+        <span class="course-price">
+          Bases de datos y lógica
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
 
 
   <!-- ============================================================
@@ -217,7 +296,7 @@
     </svg>
   </a>
 
-
   <script src="script.js"></script>
 </body>
 </html>
+

@@ -1,6 +1,30 @@
 /* ============================================================
    EDUCLIC — script.js 
    ========================================================== */
+   const API_URL = "https://6a03dbbc2afe8349b4b58ebc.mockapi.io/api/v1/Equipo";
+
+async function cargarEquipo() {
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
+
+    console.log(data); // ✅ útil para ver qué trae
+
+    const container = document.getElementById("equipo-container");
+
+    container.innerHTML = data.map(persona => `
+      <div class="card">
+        <img src="${persona.Foto}" alt="Foto" width="100">
+        <h3>${persona.Nombre}</h3>
+        <p><strong>Rol:</strong> ${persona.Rol}</p>
+        <p>${persona.Descripcion}</p>
+      </div>
+    `).join('');
+
+  } catch (error) {
+    console.error("Error cargando equipo:", error);
+  }
+}
 
 /* ============================================================
    1. DATOS — Credenciales y base de cursos
@@ -277,6 +301,13 @@ function initHome() {
   catBtns.forEach(function (btn) {
     btn.addEventListener("click", function () {
       const cat = btn.getAttribute("data-cat");
+
+      // NUEVA VISTA
+      if (cat === "cont") {
+      showView("view-cont");
+      return;
+    }
+
       appState.currentCategory = cat;
       showView("view-courses");
       renderCourses(cat);
@@ -331,22 +362,45 @@ function renderCourses(categoryKey) {
   }
 
   // Rellenamos botones para cada categoría
-  switcher.innerHTML = Object.keys(COURSES_DB).map(function (k) {
-    const active = k === categoryKey ? " active" : "";
-    // Usamos el título corto (quita emoji para botones si se desea)
-    const label = COURSES_DB[k].title.replace(/^[^\w\s]*/,'');
-    return `<button class="btn-switch${active}" data-cat="${k}">${label}</button>`;
-  }).join("");
+  switcher.innerHTML = switcher.innerHTML = `
+  <button class="btn-switch ${categoryKey === "dev" ? "active" : ""}" data-cat="dev">
+    Desarrollo de Software
+  </button>
+
+  <button class="btn-switch ${categoryKey === "design" ? "active" : ""}" data-cat="design">
+    Diseño Gráfico
+  </button>
+
+  <button class="btn-switch" data-cat="about">
+    Sobre Nosotros
+  </button>
+`;
 
   // Eventos en los botones del switcher
-  switcher.querySelectorAll(".btn-switch").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      const newCat = btn.getAttribute("data-cat");
-      if (newCat === categoryKey) return; // ya estamos en esa categoría
-      appState.currentCategory = newCat;
-      renderCourses(newCat);
-    });
+ switcher.querySelectorAll(".btn-switch").forEach(function (btn) {
+
+  btn.addEventListener("click", function () {
+
+    const newCat = btn.getAttribute("data-cat");
+
+    // NUEVA VISTA SOBRE NOSOTROS
+    if (newCat === "about") {
+
+      showView("view-equipo");
+      cargarEquipo();
+
+      return;
+    }
+
+    if (newCat === categoryKey) return;
+
+    appState.currentCategory = newCat;
+
+    renderCourses(newCat);
+
   });
+
+});
 
   grid.innerHTML = ""; // Limpiamos antes de renderizar
 
@@ -399,16 +453,15 @@ function renderCourses(categoryKey) {
 }
 
 function initCourses() {
-  // Botón "Volver" → home
-  document.querySelector("#view-courses .btn-back").addEventListener("click", function () {
+  document.getElementById("back-from-equipo")
+  .addEventListener("click", function () {
     showView("view-home");
-  });
+});
 
-  // NUEVO: Botón "Cambiar categoría" → home (para elegir otra categoría)
-  document.getElementById("btn-change-cat").addEventListener("click", function () {
+document.getElementById("btn-change-equipo")
+  .addEventListener("click", function () {
     showView("view-home");
-  });
-}
+});}
 
 
 /* ============================================================
@@ -565,7 +618,15 @@ document.addEventListener("DOMContentLoaded", function () {
   initCourses();   // incluye el botón "Cambiar categoría"
   initDetail();
   initPayment();
+  
 
   showView("view-login");
   console.log("✅ EDUCLIC inicializado correctamente.");
 });
+
+function irAEquipo() {
+  showView("view-equipo");
+  cargarEquipo();
+}
+
+
