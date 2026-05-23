@@ -270,6 +270,23 @@ body {
   color: var(--green);
   margin-bottom: 10px;
 }
+
+
+#card-design{
+  
+  p{
+    margin-bottom: 25px;
+  }
+}
+
+#card-cont{
+
+  p{
+    margin-bottom: 45px;
+  }
+}
+
+
 .category-card p { color: var(--text-soft); font-size: .95rem; line-height: 1.6; }
 
 /* ============================================================
